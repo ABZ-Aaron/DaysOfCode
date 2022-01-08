@@ -96,7 +96,11 @@ You might need to run the following after that:
 ```
 git push --set-upstream origin main
 ```
+From now on, once you've staged and commited your work locally, you can push directly to Github by running:
 
+```
+git push
+```
 10. Next up...
 
 
