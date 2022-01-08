@@ -8,7 +8,7 @@ The aim of this project is to extract the top 100 or so of these tweets, store t
 
 I'll document the steps I take below. Note that this is performed on an M1 Mac. Sytax and steps may need to be altered for other OS machines:
 
-1. Create a Twitter developer account. This allows us access to Twitter data through APIs (application programming interfaces). When we sign up, we need to register an **application**. Read more (here](https://help.twitter.com/en/rules-and-policies/twitter-api). 
+1. Create a Twitter developer account. This allows us access to Twitter data through APIs (application programming interfaces). When we sign up, we need to register an **application**. Read more [here](https://help.twitter.com/en/rules-and-policies/twitter-api). 
 
 1. Setup our files and folders. To start with, I created a **tweets.py** file in my project folder where I'll write my API script. I also set up a virtual environment using python's **venv** package. Virtual environments are great as they allow us to contain all the 3rd party libraries we need for a particular project, without interfering with our projects on our local machine. To set this up just type the following into a terminal (make sure you're in your project folder):
 
@@ -53,18 +53,36 @@ If someone wishes to install these libraries, they can add the requirements file
 pip install -r requirements.txt
 ```
 
-1. I then initialised a **git** repo, staged everything I've done this far, and committed:
+1. I then initialised a **git** repo. Before adding anything however, I also created a **.gitignore** file. We'll add stuff to this that we don't want uploaded to a public repo (we'll push all this to Github at some point). The first thing we want to add is our virtual environment folder. We can do all this in one line like this:
 
 ```
 git init
+echo "venv/" > .gitignore
+```
+
+
+1. We then stage everything we've done this far, and commit:
+
+```
 git add .
 git commit -m "First Commit"
 ```
 
 1. Now, for your API, you should have taken note of a a few keys, and setup a Project. Within the project, you'll also need to find the section to create an access token - which will give you an access token and token secret key. These are used to authenticate the user, whereas the API key and API secret key are used to authenticate the app.
 
-Because these should be kept private, I'll store them into a JSON file called `twitter_cred.json`.
+Because these should be kept private, I'll store them into a JSON file called `twitter_cred.json`. I found a script [online](https://stackabuse.com/accessing-the-twitter-api-with-python/) which can be used to generate this JSON file. I appended both the generation script and the resulting json file to my .gitignore as this info should be kept private.
 
-1. 
+```
+echo "json_generate.py" >> .gitignore
+echo "twitter_cred.json" >> .gitignore
+```
+
+Notice how I use two `>>`. This is to ensure we append to our **.gitignore** rather than overwrite it.
+
+Now that we have our API credentials in a JSON file, we have easy access to them, without including them in our main script. We can instead just import the JSON file and access our credentials indirectly.
+
+1. After running into some issues with my script, it looks like elevated access is required to gain access to the endpoints we're looking at. Therefore you'll need to go back into the twitter development portal and find the option to elevate your access (this is FREE).
+
+1. Up next...
 
 
